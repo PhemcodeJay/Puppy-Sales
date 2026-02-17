@@ -3,596 +3,377 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title>Elite Pups – Sales & Adoption</title>
-    <link rel="icon" href="https://freepngimg.com/download/dog/163170-photos-puppy-dog-face-png-image-high-quality.png">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Elite Pups · Purrs · Wings – Sales & Adoption</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1998/1998627.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { margin:0; padding:0; box-sizing:border-box; }
         body {
-            font-family: "Poppins", system-ui, -apple-system, sans-serif;
-            background: #f9f7f3;
-            color: #2f2a24;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
+            font-family: "Inter", system-ui, sans-serif;
+            background: #faf8f4; color: #1e2b2f;
+            line-height: 1.6; -webkit-font-smoothing: antialiased;
+            transition: background 0.3s, color 0.3s;
         }
-        body.dark { background: #141414; color: #e5e0d8; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+        body.dark { background: #121212; color: #e2e1dd; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
         header {
-            background: linear-gradient(135deg, #4a6c9b 0%, #6b8cc4 100%);
-            color: white;
-            padding: 1.3rem 0;
-            text-align: center;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+            background: linear-gradient(145deg, #1d3b5c 0%, #2b5b8b 100%);
+            color: white; padding: 2rem 0; text-align: center;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
         }
-        header h1 { font-size: clamp(1.8rem, 6.5vw, 2.3rem); font-weight: 600; }
-        .logo { max-width: 220px; margin-bottom: 12px; }
+        .logo-area { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .logo { width: 80px; height: 80px; border-radius: 50%; border: 4px solid #fff; object-fit: cover; }
+        h1 { font-size: clamp(2.2rem, 6vw, 3.2rem); font-weight: 700; margin: 0.4rem 0; }
+        header p { font-size: 1.15rem; opacity: 0.92; }
         .dark-toggle {
-            position: fixed; top: 12px; right: 12px; z-index: 1000;
-            background: rgba(255,255,255,0.97); color: #2c4a7c;
-            border: none; padding: 10px 14px; border-radius: 50px;
-            font-size: 0.92rem; font-weight: 600;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            position: fixed; top: 16px; right: 16px; z-index: 1000;
+            background: rgba(255,255,255,0.15); backdrop-filter: blur(6px);
+            border: 1px solid rgba(255,255,255,0.4); color: white;
+            padding: 10px 18px; border-radius: 50px; font-weight: 600;
+            cursor: pointer; transition: all 0.25s;
         }
-        body.dark .dark-toggle { background: #383838; color: #d0e0ff; }
-
+        body.dark .dark-toggle { background: rgba(30,30,40,0.8); border-color: #666; }
         .tabs {
-            display: flex;
-            justify-content: center;
-            margin: 1.5rem 0;
-            border-bottom: 2px solid #d0d8e5;
+            display: flex; justify-content: center; gap: 12px;
+            margin: 2.5rem 0 2rem; flex-wrap: wrap;
         }
-        .tab-button {
-            padding: 14px 32px;
-            background: none;
-            border: none;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #555;
-            cursor: pointer;
+        .tab-btn {
+            padding: 14px 40px; font-size: 1.15rem; font-weight: 600;
+            border: none; border-radius: 50px; cursor: pointer;
+            background: rgba(200,210,220,0.25); color: #444;
             transition: all 0.3s;
         }
-        .tab-button:hover { color: #2c4a7c; }
-        .tab-button.active {
-            color: #2c4a7c;
-            border-bottom: 4px solid #2c7a4e;
+        body.dark .tab-btn { background: #1f262e; color: #c0d0e0; }
+        .tab-btn.active {
+            background: #1d3b5c; color: white; box-shadow: 0 6px 20px rgba(0,0,0,0.4);
         }
-        body.dark .tabs { border-bottom-color: #555; }
-        body.dark .tab-button { color: #aaa; }
-        body.dark .tab-button:hover, body.dark .tab-button.active { color: #a8c0ff; }
-        body.dark .tab-button.active { border-bottom-color: #66bb6a; }
-
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-
+        body.dark .tab-btn.active { background: #316794; }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
         .card {
-            background: white; border-radius: 16px;
-            padding: clamp(18px, 4.5vw, 26px); margin: 20px 0;
-            box-shadow: 0 5px 18px rgba(0,0,0,0.09);
+            background: white; border-radius: 24px; padding: 28px;
+            margin: 24px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
-        body.dark .card { background: #222; box-shadow: 0 5px 18px rgba(0,0,0,0.5); }
-        h2 { color: #2c4a7c; font-size: clamp(1.4rem, 4.8vw, 1.7rem); margin-bottom: 1.1rem; font-weight: 600; }
-        body.dark h2 { color: #a8c0ff; }
-        .price {
-            text-align: center; font-size: clamp(2.4rem, 8vw, 3.2rem);
-            font-weight: 700; color: #2c7a4e; margin: 0.8rem 0 1.3rem;
+        .card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(0,0,0,0.12); }
+        body.dark .card { background: #1e262f; box-shadow: 0 10px 30px #0004; }
+        h2 { font-size: 1.9rem; color: #1d3b5c; margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; }
+        body.dark h2 { color: #b3d6ff; }
+        .price-tag { font-size: 3rem; font-weight: 800; color: #1f8b6c; text-align: center; margin: 0.8rem 0; }
+        body.dark .price-tag { color: #5fdaa4; }
+        .meta { display: flex; gap: 18px; flex-wrap: wrap; color: #456; font-weight: 500; margin: 1rem 0; }
+        body.dark .meta { color: #aaccdd; }
+        .slider-container {
+            aspect-ratio: 16/9; overflow: hidden; border-radius: 20px;
+            background: #111; position: relative; margin: 1.4rem 0;
         }
-        .nutrition-guide ul { list-style-type: disc; padding-left: 1.8rem; margin: 1rem 0; }
-        .nutrition-guide li { margin-bottom: 0.6rem; }
-        .testimonial {
-            font-style: italic;
-            color: #555;
-            margin: 1rem 0;
-            padding: 1rem;
-            background: #f0f8ff;
-            border-left: 5px solid #2c7a4e;
-            border-radius: 8px;
-        }
-        body.dark .testimonial { background: #1e2f44; color: #ccc; border-left-color: #66bb6a; }
-        .slider {
-            aspect-ratio: 4 / 3; overflow: hidden; border-radius: 14px;
-            margin: 1.3rem 0; background: #000; position: relative;
-        }
-        @media (min-aspect-ratio: 1/1) { .slider { aspect-ratio: 16 / 9; } }
-        .slides { display: flex; height: 100%; transition: transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1); }
-        .slides img { width: 100%; height: 100%; object-fit: cover; flex-shrink: 0; }
+        .slider-track { display: flex; height: 100%; transition: transform 0.5s ease; }
+        .slider-track img { width: 100%; height: 100%; object-fit: cover; flex-shrink: 0; }
         .slider-arrow {
             position: absolute; top: 50%; transform: translateY(-50%);
-            width: 48px; height: 48px; background: rgba(0,0,0,0.55); color: white;
-            border: none; border-radius: 50%; font-size: 1.8rem; cursor: pointer;
-            opacity: 0.8; transition: all 0.2s; z-index: 10;
+            width: 50px; height: 50px; background: rgba(0,0,0,0.6);
+            color: white; border: none; border-radius: 50%; font-size: 2rem;
+            cursor: pointer; transition: background 0.2s; z-index: 10;
         }
-        .slider-arrow:hover, .slider-arrow:active { opacity: 1; background: rgba(0,0,0,0.8); }
-        .prev { left: 12px; } .next { right: 12px; }
-        .slider-dots { display: flex; justify-content: center; gap: 10px; margin-top: 12px; }
-        .slider-dot {
-            width: 10px; height: 10px; background: rgba(255,255,255,0.5);
-            border-radius: 50%; cursor: pointer; transition: all 0.25s;
+        .slider-arrow:hover { background: rgba(0,0,0,0.9); }
+        .prev { left: 15px; } .next { right: 15px; }
+        .dots { display: flex; justify-content: center; gap: 12px; margin-top: 12px; }
+        .dot { width: 12px; height: 12px; background: #ccc; border-radius: 50%; cursor: pointer; transition: all 0.25s; }
+        .dot.active { background: #1d3b5c; transform: scale(1.3); width: 16px; }
+        body.dark .dot { background: #555; } body.dark .dot.active { background: #7ad0aa; }
+        .testimonial {
+            background: #f0f8ff; border-radius: 16px; padding: 20px; margin: 1.5rem 0;
+            border-left: 5px solid #1d3b5c; font-style: italic; color: #444;
         }
-        .slider-dot.active { background: #2c7a4e; transform: scale(1.3); }
-
-        .contact-form { display: flex; flex-direction: column; gap: 1rem; }
-        .contact-form label { font-weight: 500; margin-bottom: 0.3rem; display: block; color: #2c4a7c; }
-        body.dark .contact-form label { color: #a8c0ff; }
-        .contact-form input, .contact-form textarea, .contact-form select {
-            width: 100%; padding: 14px 16px;
-            border: 1px solid #d0d8e5; border-radius: 12px;
-            font-size: 1rem; background: white;
+        body.dark .testimonial { background: #17222d; border-left-color: #6fa3e0; color: #ddd; }
+        .tips-list { list-style: none; margin-top: 1.2rem; }
+        .tips-list li { padding-left: 32px; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="%231f8b6c"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>') left center no-repeat; background-size: 22px; margin-bottom: 0.8rem; }
+        body.dark .tips-list li { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="%235fdaa4"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>'); }
+        .form-card { background: #fff; border-radius: 24px; padding: 32px; margin: 32px 0; }
+        body.dark .form-card { background: #1f2a33; }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        .full { grid-column: 1 / -1; }
+        label { font-weight: 600; color: #1d3b5c; }
+        body.dark label { color: #b3d9ff; }
+        input, select, textarea {
+            padding: 14px 18px; border: 1px solid #d0dbea; border-radius: 12px;
+            font-size: 1rem; background: #fff;
         }
-        body.dark .contact-form input, body.dark .contact-form textarea, body.dark .contact-form select {
-            background: #2a2a2a; color: #eee; border-color: #555;
+        body.dark input, body.dark select, body.dark textarea {
+            background: #2e3b48; border-color: #4a5f78; color: #f0f4fa;
         }
-        .contact-form button {
-            width: 100%; padding: 16px; background: #2c4a7c; color: white;
-            border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600;
-            cursor: pointer; min-height: 54px; margin-top: 1rem;
+        button[type="submit"] {
+            grid-column: 1 / -1; padding: 18px; background: #1d3b5c; color: white;
+            border: none; border-radius: 12px; font-size: 1.15rem; font-weight: 700;
+            cursor: pointer; margin-top: 1.5rem; transition: background 0.2s;
         }
-        .contact-form button:active { background: #3a5a9c; }
-        .form-intro { font-size: 1.05rem; color: #444; margin-bottom: 1.5rem; }
-        body.dark .form-intro { color: #ccc; }
-
+        button[type="submit"]:hover { background: #163249; }
         .float-wrap {
-            position: fixed; right: 14px; bottom: 14px; z-index: 900;
-            display: flex; flex-direction: column; gap: 18px;
+            position: fixed; right: 20px; bottom: 20px; z-index: 900;
+            display: flex; flex-direction: column; gap: 16px;
         }
         .float-btn {
             width: 64px; height: 64px; border-radius: 50%;
+            background: white; box-shadow: 0 8px 20px rgba(0,0,0,0.35);
             display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 14px rgba(0,0,0,0.38); transition: transform 0.15s;
+            transition: transform 0.15s;
         }
-        .float-btn:active { transform: scale(0.93); }
-        .whatsapp { background: #25d366; }
-        .telegram { background: #0088cc; }
-        .email { background: #d44638; }
+        .float-btn:active { transform: scale(0.92); }
         .float-btn img { width: 38px; }
+        .whatsapp { background: #25d366; } .telegram { background: #0088cc; } .email { background: #ea4335; }
         footer {
-            background: #1a2a4a; color: #c0d4ff;
-            text-align: center; padding: 2.2rem 1rem; margin-top: 50px; font-size: 0.92rem;
+            background: #0b1b2f; color: #b3cef0; text-align: center;
+            padding: 3rem 1rem; margin-top: 60px;
         }
-        footer a { color: #a8c0ff; text-decoration: none; }
-        @media (max-width: 600px) {
-            .container { padding: 0 14px; }
-            .card { padding: 18px; margin: 16px 0; }
-            .price { font-size: 2.7rem; }
-            .float-wrap { right: 12px; bottom: 12px; gap: 16px; }
-            .float-btn { width: 60px; height: 60px; }
-            .float-btn img { width: 34px; }
-            .slider-arrow { width: 44px; height: 44px; font-size: 1.5rem; }
-            .prev { left: 8px; } .next { right: 8px; }
+        footer a { color: #9bc0ff; text-decoration: none; }
+        @media (max-width: 700px) {
+            .tabs { flex-direction: column; align-items: center; }
+            .tab-btn { width: 90%; text-align: center; }
         }
     </style>
 </head>
 <body>
-<button class="dark-toggle" onclick="document.body.classList.toggle('dark')">Dark Mode</button>
+
+<button class="dark-toggle" onclick="document.body.classList.toggle('dark')">🌓 Dark/Light</button>
 
 <header>
-    <div class="container">
-        <img src="https://images.vexels.com/media/users/3/266217/raw/8047a986ac1cade599b35b3997ef0c70-dog-breeding-logo-template.jpg" alt="Elite Pups Logo" class="logo">
-        <h1>Elite Pups</h1>
-        <p style="font-size:1.1rem; opacity:0.95;">Responsible Sales • Loving Adoptions • Health Guarantee</p>
+    <div class="container logo-area">
+        <img class="logo" src="https://images.vexels.com/media/users/3/266217/raw/8047a986ac1cade599b35b3997ef0c70-dog-breeding-logo-template.jpg" alt="Elite Logo">
+        <div>
+            <h1>Elite Pups · Purrs · Wings</h1>
+            <p>Ethical Sales • Loving Adoptions • Dogs, Cats, Parrots & Small Pets</p>
+        </div>
     </div>
 </header>
 
 <div class="container">
     <div class="tabs">
-        <button class="tab-button active" onclick="openTab(event, 'sales')">Sales / Purchase</button>
-        <button class="tab-button" onclick="openTab(event, 'adoption')">Adoption / Rehoming</button>
+        <button class="tab-btn active" onclick="openTab('sales')">🐾 Sales / Purchase</button>
+        <button class="tab-btn" onclick="openTab('adoption')">❤️ Adoption / Rehoming</button>
     </div>
 
     <!-- SALES TAB -->
-    <div id="sales" class="tab-content active">
-        <p style="text-align:center; font-size:1.1rem; color:#555; margin:1.5rem 0;">
-            Browse puppies available for responsible purchase. All come vaccinated, vet-checked, with 1-year health guarantee.
+    <div id="sales" class="tab-panel active">
+        <p style="text-align:center; font-size:1.15rem; color:#555; margin-bottom:2rem;">
+            Quality puppies, kittens, birds & small pets • Vaccinated • Health guarantee • Vet-checked
         </p>
 
-        <!-- Labrador -->
+        <!-- Dogs -->
         <div class="card">
-            <h2>Labrador Retriever Puppy – For Sale</h2>
-            <div class="price">$1,200</div>
-            <p style="text-align:center; font-size:1.05rem; color:#555; margin:0.7rem 0 1.3rem;">
-                Friendly • Family-oriented • Vaccinated • Vet-checked
-            </p>
-            <div class="slider" id="slider-sales1">
-                <div class="slides" id="slides-sales1">
-                    <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb" alt="Labrador 1">
-                    <img src="https://images.unsplash.com/photo-1561037404-61cd46aa615b" alt="Labrador 2">
-                    <img src="https://images.unsplash.com/photo-1591160690555-5debfba289f0" alt="Labrador 3">
+            <h2>🐕 Labrador Retriever Puppy</h2>
+            <div class="price-tag">$1,350</div>
+            <div class="meta"><span>Family-oriented</span><span>Friendly</span><span>1-yr health</span></div>
+            <div class="slider-container">
+                <div class="slider-track" id="s1">
+                    <img src="https://images.unsplash.com/photo-1561037404-61cd46aa615b" alt="Lab 1">
+                    <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb" alt="Lab 2">
+                    <img src="https://images.unsplash.com/photo-1591160690555-5debfba289f0" alt="Lab 3">
                 </div>
-                <button class="slider-arrow prev" onclick="prevSlide('sales1')">❮</button>
-                <button class="slider-arrow next" onclick="nextSlide('sales1')">❯</button>
+                <button class="slider-arrow prev" onclick="prev('s1')">❮</button>
+                <button class="slider-arrow next" onclick="next('s1')">❯</button>
             </div>
-            <div class="slider-dots" id="dots-sales1"></div>
+            <div class="dots" id="dots-s1"></div>
         </div>
 
-        <!-- French Bulldog -->
         <div class="card">
-            <h2>French Bulldog Puppy – For Sale</h2>
-            <div class="price">$2,500</div>
-            <p style="text-align:center; font-size:1.05rem; color:#555; margin:0.7rem 0 1.3rem;">
-                Charming • Low-energy • Vaccinated • Vet-checked
-            </p>
-            <div class="slider" id="slider-sales2">
-                <div class="slides" id="slides-sales2">
+            <h2>🐕 Golden Retriever Puppy</h2>
+            <div class="price-tag">$1,650</div>
+            <div class="meta"><span>Gentle</span><span>Loyal</span><span>Vaccinated</span></div>
+            <div class="slider-container">
+                <div class="slider-track" id="s2">
+                    <img src="https://images.unsplash.com/photo-1561948955-570b270e7c36" alt="Golden 1">
+                    <img src="https://images.unsplash.com/photo-1605568427561-4b30266e3e0f" alt="Golden 2">
+                    <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e" alt="Golden 3">
+                </div>
+                <button class="slider-arrow prev" onclick="prev('s2')">❮</button>
+                <button class="slider-arrow next" onclick="next('s2')">❯</button>
+            </div>
+            <div class="dots" id="dots-s2"></div>
+        </div>
+
+        <div class="card">
+            <h2>🐕 French Bulldog Puppy</h2>
+            <div class="price-tag">$2,900</div>
+            <div class="meta"><span>Charming</span><span>Low-energy</span><span>Microchipped</span></div>
+            <div class="slider-container">
+                <div class="slider-track" id="s3">
                     <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e" alt="Frenchie 1">
                     <img src="https://images.unsplash.com/photo-1612536056487-3d5c3d3e3d3d" alt="Frenchie 2">
-                    <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800" alt="Frenchie 3">
+                    <img src="https://images.unsplash.com/photo-1543852786-1cf6624b9987" alt="Frenchie 3">
                 </div>
-                <button class="slider-arrow prev" onclick="prevSlide('sales2')">❮</button>
-                <button class="slider-arrow next" onclick="nextSlide('sales2')">❯</button>
+                <button class="slider-arrow prev" onclick="prev('s3')">❮</button>
+                <button class="slider-arrow next" onclick="next('s3')">❯</button>
             </div>
-            <div class="slider-dots" id="dots-sales2"></div>
+            <div class="dots" id="dots-s3"></div>
         </div>
 
-        <!-- Golden Retriever -->
+        <!-- More dog breeds can be added similarly (German Shepherd $1,950, Poodle $1,750, etc.) -->
+
+        <!-- Cats -->
         <div class="card">
-            <h2>Golden Retriever Puppy – For Sale</h2>
-            <div class="price">$1,500</div>
-            <p style="text-align:center; font-size:1.05rem; color:#555; margin:0.7rem 0 1.3rem;">
-                Gentle • Loyal • Vaccinated • Vet-checked
-            </p>
-            <div class="slider" id="slider-sales3">
-                <div class="slides" id="slides-sales3">
-                    <img src="https://images.unsplash.com/photo-1561948955-570b270e7c36" alt="Golden 1">
-                    <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb" alt="Golden 2">
-                    <img src="https://images.unsplash.com/photo-1605568427561-4b30266e3e0f" alt="Golden 3">
+            <h2>🐈 Maine Coon Kitten</h2>
+            <div class="price-tag">$2,800</div>
+            <div class="meta"><span>Large & majestic</span><span>TICA reg.</span><span>Health tested</span></div>
+            <div class="slider-container">
+                <div class="slider-track" id="s4">
+                    <img src="https://images.unsplash.com/photo-1608848461950-0fe51dfc41cb" alt="Maine Coon 1">
+                    <img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6" alt="Maine Coon 2">
+                    <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006" alt="Maine Coon 3">
                 </div>
-                <button class="slider-arrow prev" onclick="prevSlide('sales3')">❮</button>
-                <button class="slider-arrow next" onclick="nextSlide('sales3')">❯</button>
+                <button class="slider-arrow prev" onclick="prev('s4')">❮</button>
+                <button class="slider-arrow next" onclick="next('s4')">❯</button>
             </div>
-            <div class="slider-dots" id="dots-sales3"></div>
+            <div class="dots" id="dots-s4"></div>
         </div>
 
-        <!-- German Shepherd -->
+        <!-- Birds & Small Pets -->
         <div class="card">
-            <h2>German Shepherd Puppy – For Sale</h2>
-            <div class="price">$1,800</div>
-            <p style="text-align:center; font-size:1.05rem; color:#555; margin:0.7rem 0 1.3rem;">
-                Intelligent • Protective • Vaccinated • Vet-checked
-            </p>
-            <div class="slider" id="slider-sales4">
-                <div class="slides" id="slides-sales4">
-                    <img src="https://images.unsplash.com/photo-1589941013453-ec89f33b5e95" alt="GSD 1">
-                    <img src="https://images.unsplash.com/photo-1617890686219-509e1a0596e2" alt="GSD 2">
-                    <img src="https://images.unsplash.com/photo-1567752881299-894d8e6d8e8f" alt="GSD 3">
+            <h2>🦜 African Grey Parrot</h2>
+            <div class="price-tag">$3,200</div>
+            <div class="meta"><span>Hand-raised</span><span>Talker</span><span>CITES</span></div>
+            <div class="slider-container">
+                <div class="slider-track" id="s5">
+                    <img src="https://images.unsplash.com/photo-1555169062-013468b47731" alt="Grey 1">
+                    <img src="https://images.unsplash.com/photo-1583355862089-81e9e6e50f7a" alt="Grey 2">
+                    <img src="https://images.unsplash.com/photo-1534778355611-9c6b764703b6" alt="Grey 3">
                 </div>
-                <button class="slider-arrow prev" onclick="prevSlide('sales4')">❮</button>
-                <button class="slider-arrow next" onclick="nextSlide('sales4')">❯</button>
+                <button class="slider-arrow prev" onclick="prev('s5')">❮</button>
+                <button class="slider-arrow next" onclick="next('s5')">❯</button>
             </div>
-            <div class="slider-dots" id="dots-sales4"></div>
+            <div class="dots" id="dots-s5"></div>
         </div>
 
-        <!-- Poodle -->
+        <!-- Add more: Beagle $1,450, Persian $2,600, Budgie $90, Mini Lop $130, Guinea Pig $70, etc. -->
+
         <div class="card">
-            <h2>Poodle Puppy – For Sale</h2>
-            <div class="price">$1,600</div>
-            <p style="text-align:center; font-size:1.05rem; color:#555; margin:0.7rem 0 1.3rem;">
-                Intelligent • Hypoallergenic • Vaccinated • Vet-checked
-            </p>
-            <div class="slider" id="slider-sales5">
-                <div class="slides" id="slides-sales5">
-                    <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e" alt="Poodle 1">
-                    <img src="https://images.unsplash.com/photo-1620421680010-0766ff230392" alt="Poodle 2">
-                    <img src="https://images.unsplash.com/photo-1617890686219-509e1a0596e2" alt="Poodle 3">
-                </div>
-                <button class="slider-arrow prev" onclick="prevSlide('sales5')">❮</button>
-                <button class="slider-arrow next" onclick="nextSlide('sales5')">❯</button>
-            </div>
-            <div class="slider-dots" id="dots-sales5"></div>
-        </div>
-
-        <!-- Bulldog -->
-        <div class="card">
-            <h2>Bulldog Puppy – For Sale</h2>
-            <div class="price">$2,200</div>
-            <p style="text-align:center; font-size:1.05rem; color:#555; margin:0.7rem 0 1.3rem;">
-                Calm • Loyal • Vaccinated • Vet-checked
-            </p>
-            <div class="slider" id="slider-sales6">
-                <div class="slides" id="slides-sales6">
-                    <img src="https://images.unsplash.com/photo-1567752881299-894d8e6d8e8f" alt="Bulldog 1">
-                    <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e" alt="Bulldog 2">
-                    <img src="https://images.unsplash.com/photo-1612536056487-3d5c3d3e3d3d" alt="Bulldog 3">
-                </div>
-                <button class="slider-arrow prev" onclick="prevSlide('sales6')">❮</button>
-                <button class="slider-arrow next" onclick="nextSlide('sales6')">❯</button>
-            </div>
-            <div class="slider-dots" id="dots-sales6"></div>
-        </div>
-
-        <!-- Beagle -->
-        <div class="card">
-            <h2>Beagle Puppy – For Sale</h2>
-            <div class="price">$1,300</div>
-            <p style="text-align:center; font-size:1.05rem; color:#555; margin:0.7rem 0 1.3rem;">
-                Curious • Friendly • Vaccinated • Vet-checked
-            </p>
-            <div class="slider" id="slider-sales7">
-                <div class="slides" id="slides-sales7">
-                    <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb" alt="Beagle 1">
-                    <img src="https://images.unsplash.com/photo-1617890686219-509e1a0596e2" alt="Beagle 2">
-                    <img src="https://images.unsplash.com/photo-1561948955-570b270e7c36" alt="Beagle 3">
-                </div>
-                <button class="slider-arrow prev" onclick="prevSlide('sales7')">❮</button>
-                <button class="slider-arrow next" onclick="nextSlide('sales7')">❯</button>
-            </div>
-            <div class="slider-dots" id="dots-sales7"></div>
-        </div>
-
-        <!-- Chihuahua -->
-        <div class="card">
-            <h2>Chihuahua Puppy – For Sale</h2>
-            <div class="price">$900</div>
-            <p style="text-align:center; font-size:1.05rem; color:#555; margin:0.7rem 0 1.3rem;">
-                Sassy • Portable • Vaccinated • Vet-checked
-            </p>
-            <div class="slider" id="slider-sales8">
-                <div class="slides" id="slides-sales8">
-                    <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e" alt="Chihuahua 1">
-                    <img src="https://images.unsplash.com/photo-1612536056487-3d5c3d3e3d3d" alt="Chihuahua 2">
-                    <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb" alt="Chihuahua 3">
-                </div>
-                <button class="slider-arrow prev" onclick="prevSlide('sales8')">❮</button>
-                <button class="slider-arrow next" onclick="nextSlide('sales8')">❯</button>
-            </div>
-            <div class="slider-dots" id="dots-sales8"></div>
-        </div>
-
-        <!-- Siberian Husky -->
-        <div class="card">
-            <h2>Siberian Husky Puppy – For Sale</h2>
-            <div class="price">$1,400</div>
-            <p style="text-align:center; font-size:1.05rem; color:#555; margin:0.7rem 0 1.3rem;">
-                Energetic • Striking eyes • Vaccinated • Vet-checked
-            </p>
-            <div class="slider" id="slider-sales9">
-                <div class="slides" id="slides-sales9">
-                    <img src="https://images.unsplash.com/photo-1605568427561-4b30266e3e0f" alt="Husky 1">
-                    <img src="https://images.unsplash.com/photo-1589941013453-ec89f33b5e95" alt="Husky 2">
-                    <img src="https://images.unsplash.com/photo-1617890686219-509e1a0596e2" alt="Husky 3">
-                </div>
-                <button class="slider-arrow prev" onclick="prevSlide('sales9')">❮</button>
-                <button class="slider-arrow next" onclick="nextSlide('sales9')">❯</button>
-            </div>
-            <div class="slider-dots" id="dots-sales9"></div>
-        </div>
-
-        <!-- Australian Shepherd -->
-        <div class="card">
-            <h2>Australian Shepherd Puppy – For Sale</h2>
-            <div class="price">$1,700</div>
-            <p style="text-align:center; font-size:1.05rem; color:#555; margin:0.7rem 0 1.3rem;">
-                Active • Intelligent • Vaccinated • Vet-checked
-            </p>
-            <div class="slider" id="slider-sales10">
-                <div class="slides" id="slides-sales10">
-                    <img src="https://images.unsplash.com/photo-1567752881299-894d8e6d8e8f" alt="Aussie 1">
-                    <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e" alt="Aussie 2">
-                    <img src="https://images.unsplash.com/photo-1612536056487-3d5c3d3e3d3d" alt="Aussie 3">
-                </div>
-                <button class="slider-arrow prev" onclick="prevSlide('sales10')">❮</button>
-                <button class="slider-arrow next" onclick="nextSlide('sales10')">❯</button>
-            </div>
-            <div class="slider-dots" id="dots-sales10"></div>
-        </div>
-
-        <!-- Puppy Nutrition Guide -->
-        <div class="card nutrition-guide">
-            <h2>Puppy Nutrition Guide</h2>
-            <p>Proper nutrition is essential for healthy growth. Follow these guidelines (consult your vet for personalized advice):</p>
-            <ul>
-                <li><strong>Age 0–8 weeks</strong>: Mother's milk or high-quality puppy milk replacer. Transition to puppy food around 3–4 weeks.</li>
-                <li><strong>8 weeks – 6 months</strong>: Feed high-quality large-breed or all-breed puppy formula 3–4 times per day. Look for AAFCO-approved "growth" stage food.</li>
-                <li><strong>6–12 months</strong>: Reduce to 2–3 meals per day. Switch to adult food gradually between 9–18 months depending on breed size.</li>
-                <li><strong>Key nutrients</strong>: High protein (25–30%), DHA for brain development, calcium/phosphorus balance for bones, omega-3/6 for coat & skin.</li>
-                <li><strong>Feeding tips</strong>: Always provide fresh water. Avoid table scraps, chocolate, grapes, onions, xylitol. Do not overfeed – use feeding chart on food bag.</li>
-                <li><strong>Supplements</strong>: Usually not needed if using quality puppy food. Glucosamine/chondroitin may help large breeds after vet approval.</li>
+            <h2>🐾 New Owner Tips (All Pets)</h2>
+            <ul class="tips-list">
+                <li><strong>Dogs:</strong> Crate training, positive reinforcement, daily walks.</li>
+                <li><strong>Cats:</strong> Scratching posts, playtime, slow introductions.</li>
+                <li><strong>Parrots:</strong> Daily interaction, foraging toys, safe environment.</li>
+                <li><strong>Small pets:</strong> Unlimited hay (rabbits/guinea pigs), gentle handling, spacious enclosure.</li>
+                <li>Always: Fresh water, quality food, regular vet care.</li>
             </ul>
-            <p style="margin-top:1rem; font-size:0.95rem; color:#666;">
-                Feed measured amounts — obesity is common in puppies. Transition foods slowly over 7–10 days.
-            </p>
-        </div>
-
-        <!-- Testimonials -->
-        <div class="card">
-            <h2>What Our Families Say</h2>
-            <div class="testimonial">
-                "Adopting our Labrador from Elite Pups was the best decision! Healthy, happy, and already part of the family." — Sarah M., Nairobi
-            </div>
-            <div class="testimonial">
-                "The French Bulldog puppy we got is perfect — great support from the team throughout the process." — James K.
-            </div>
-            <div class="testimonial">
-                "Our Golden Retriever is gentle and loving. Highly recommend Elite Pups!" — Aisha L.
-            </div>
         </div>
 
         <div class="card">
-            <h2>Ready to Purchase?</h2>
-            <p style="text-align:center;">Contact us via WhatsApp, Telegram, or email to check availability, discuss payment, and arrange pickup/delivery.</p>
+            <h2>💬 Happy Families</h2>
+            <div class="testimonial">"Our Golden Retriever is amazing — healthy and so loving. Thank you Elite!" — Aisha, Nairobi</div>
+            <div class="testimonial">"The Maine Coon kitten is majestic. Great support throughout." — James, Nairobi</div>
+            <div class="testimonial">"Adopted our talking African Grey — smart and funny!" — Sarah</div>
         </div>
     </div>
 
     <!-- ADOPTION TAB -->
-    <div id="adoption" class="tab-content">
-        <p style="text-align:center; font-size:1.1rem; color:#555; margin:1.5rem 0;">
-            Looking to adopt? These puppies are available for loving homes. Fill out the inquiry form below.
+    <div id="adoption" class="tab-panel">
+        <p style="text-align:center; font-size:1.15rem; color:#555; margin-bottom:2rem;">
+            Loving homes wanted • Many pets ready • Adoption fee covers vetting, microchip & starter items
         </p>
 
-        <!-- Adoption breed cards (same images, adapted text) -->
-        <!-- Example for Labrador – repeat pattern for all 10 -->
+        <!-- Example adoption listings (similar structure, lower fees) -->
         <div class="card">
-            <h2>Labrador Retriever Puppy – Available for Adoption</h2>
-            <div class="price">$1,200 Adoption Fee</div>
-            <p style="text-align:center; font-size:1.05rem; color:#555; margin:0.7rem 0 1.3rem;">
-                Friendly • Family-oriented • Vaccinated • Vet-checked • Health guarantee
-            </p>
-            <div class="slider" id="slider-adopt1">
-                <div class="slides" id="slides-adopt1">
-                    <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb" alt="Labrador 1">
-                    <img src="https://images.unsplash.com/photo-1561037404-61cd46aa615b" alt="Labrador 2">
-                    <img src="https://images.unsplash.com/photo-1591160690555-5debfba289f0" alt="Labrador 3">
+            <h2>🐕 Labrador Retriever (2 yr) – Adoption</h2>
+            <div class="price-tag">Donation $380</div>
+            <div class="meta"><span>Neutered</span><span>Vaccinated</span><span>Chipped</span></div>
+            <div class="slider-container">
+                <div class="slider-track" id="a1">
+                    <img src="https://images.unsplash.com/photo-1561037404-61cd46aa615b" alt="Lab adopt 1">
+                    <img src="https://images.unsplash.com/photo-1546527868-ccb7ee7dfa6a" alt="Lab adopt 2">
                 </div>
-                <button class="slider-arrow prev" onclick="prevSlide('adopt1')">❮</button>
-                <button class="slider-arrow next" onclick="nextSlide('adopt1')">❯</button>
+                <button class="slider-arrow prev" onclick="prev('a1')">❮</button>
+                <button class="slider-arrow next" onclick="next('a1')">❯</button>
             </div>
-            <div class="slider-dots" id="dots-adopt1"></div>
+            <div class="dots" id="dots-a1"></div>
         </div>
 
-        <!-- ... Repeat the same structure for breeds 2–10 with adopt2 to adopt10 IDs ... -->
+        <!-- Add more: Cat $180, Cockatiel $95, Beagle $280, Rabbit $50, Guinea Pig pair $75, etc. -->
 
-        <!-- Nutrition Guide (same as sales tab) -->
-        <div class="card nutrition-guide">
-            <h2>Puppy Nutrition Guide</h2>
-            <!-- Same content as in sales tab -->
-            <p>Proper nutrition is essential for healthy growth. Follow these guidelines (consult your vet for personalized advice):</p>
-            <ul>
-                <li><strong>Age 0–8 weeks</strong>: Mother's milk or high-quality puppy milk replacer...</li>
-                <!-- ... full list ... -->
-            </ul>
-            <p style="margin-top:1rem; font-size:0.95rem; color:#666;">
-                Feed measured amounts — obesity is common in puppies. Transition foods slowly over 7–10 days.
-            </p>
-        </div>
-
-        <!-- Detailed Contact / Adoption Inquiry Form -->
-        <div class="card contact-form">
-            <h2>Adoption / Purchase Inquiry Form</h2>
-            <p class="form-intro">Please fill out as much detail as possible so we can help match you with the perfect puppy and guide you through next steps.</p>
-            
-            <form action="mailto:contact@elitepupsadoption.com" method="post" enctype="text/plain">
-                <label for="name">Full Name *</label>
-                <input type="text" id="name" name="name" placeholder="Your full name" required>
-
-                <label for="email">Email Address *</label>
-                <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
-
-                <label for="phone">Phone Number *</label>
-                <input type="tel" id="phone" name="phone" placeholder="+254 7XX XXX XXX" required>
-
-                <label for="address">City / Area / County *</label>
-                <input type="text" id="address" name="address" placeholder="e.g., Westlands, Nairobi" required>
-
-                <label for="interest">I'm interested in *</label>
-                <select id="interest" name="interest" required>
-                    <option value="">Select...</option>
-                    <option value="purchase">Purchasing a puppy</option>
-                    <option value="adoption">Adopting a puppy</option>
-                    <option value="both">Either purchase or adoption</option>
-                </select>
-
-                <label for="preferences">Preferred Breed(s) / Puppy Traits</label>
-                <textarea id="preferences" name="preferences" rows="3" placeholder="e.g., Labrador or Golden, good with kids, medium energy..."></textarea>
-
-                <label for="household">Household Info</label>
-                <textarea id="household" name="household" rows="4" placeholder="Adults? Children (ages)? Other pets? House / apartment? Yard?"></textarea>
-
-                <label for="experience">Previous Dog Experience</label>
-                <textarea id="experience" name="experience" rows="3" placeholder="Have you owned dogs before? Breeds? How long?"></textarea>
-
-                <label for="timeline">When are you looking to bring a puppy home?</label>
-                <input type="text" id="timeline" name="timeline" placeholder="e.g., Next 2 weeks, within a month, flexible">
-
-                <label for="message">Questions / Comments</label>
-                <textarea id="message" name="message" rows="5" placeholder="Any specific questions about health, transport, nutrition, training...?"></textarea>
-
-                <button type="submit">Send Inquiry</button>
+        <div class="form-card">
+            <h2>📩 Adoption / Purchase Inquiry</h2>
+            <form action="mailto:contact@elitepupsandpaws.com" method="post" enctype="text/plain">
+                <div class="form-grid">
+                    <div class="form-group"><label>Full Name *</label><input type="text" name="name" required placeholder="Your name"></div>
+                    <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="your@email.com"></div>
+                    <div class="form-group"><label>Phone *</label><input type="tel" name="phone" required placeholder="+254 ..."></div>
+                    <div class="form-group"><label>City / Area *</label><input type="text" name="location" required placeholder="e.g. Nairobi"></div>
+                    <div class="form-group"><label>Interested in *</label>
+                        <select name="interest" required>
+                            <option value="">Select...</option>
+                            <option>Purchase</option><option>Adoption</option><option>Both</option>
+                        </select>
+                    </div>
+                    <div class="form-group full"><label>Preferred Pet / Breed</label><textarea name="preferences" rows="3" placeholder="e.g. Labrador, good with kids..."></textarea></div>
+                    <div class="form-group full"><label>Household & Experience</label><textarea name="household" rows="4" placeholder="Adults? Kids? Other pets? House/apartment? Previous experience?"></textarea></div>
+                    <div class="form-group full"><label>Timeline & Questions</label><textarea name="message" rows="5" placeholder="When? Any questions about health, transport, care...?"></textarea></div>
+                    <button type="submit">Send Message</button>
+                </div>
             </form>
+        </div>
+
+        <div class="card">
+            <h2>❤️ Adoption Stories</h2>
+            <div class="testimonial">"Our adopted Beagle settled in immediately — thank you for the perfect match!" — Priya</div>
+            <div class="testimonial">"The guinea pig pair we adopted are so happy and social." — Liam</div>
         </div>
     </div>
 </div>
 
 <div class="float-wrap">
-    <a class="float-btn whatsapp" href="https://wa.me/18648513830" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-    </a>
-    <a class="float-btn telegram" href="https://t.me/Poppytradehub" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
-    </a>
-    <a class="float-btn email" href="mailto:contact@elitepupsadoption.com">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" alt="Email">
-    </a>
+    <a class="float-btn whatsapp" href="https://wa.me/18648513830" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"></a>
+    <a class="float-btn telegram" href="https://t.me/Poppytradehub" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram"></a>
+    <a class="float-btn email" href="mailto:contact@elitepupsandpaws.com"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" alt="Email"></a>
 </div>
 
 <footer>
-    <p>Elite Pups • Responsible Placement • Every Pup Deserves a Loving Home</p>
-    <p style="margin-top:0.9rem;">
-        WhatsApp: <a href="https://wa.me/18648513830">+1 (864) 851-3830</a><br>
-        Telegram: <a href="https://t.me/Poppytradehub">@Poppytradehub</a><br>
-        Email: <a href="mailto:contact@elitepupsadoption.com">contact@elitepupsadoption.com</a>
+    <p>Elite Pups · Purrs · Wings – Ethical • Responsible • Lifetime Support</p>
+    <p style="margin:1.2rem 0;">
+        WhatsApp: <a href="https://wa.me/18648513830">+1 (864) 851-3830</a> •
+        Telegram: <a href="https://t.me/Poppytradehub">@Poppytradehub</a> •
+        Email: <a href="mailto:contact@elitepupsandpaws.com">contact@elitepupsandpaws.com</a>
     </p>
+    <p>Visits by appointment • Health guarantee on all pets</p>
 </footer>
 
 <script>
-// Tab switching
-function openTab(evt, tabName) {
-    document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
-    document.querySelectorAll(".tab-button").forEach(el => el.classList.remove("active"));
-    document.getElementById(tabName).classList.add("active");
-    evt.currentTarget.classList.add("active");
+function openTab(tab) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(tab).classList.add('active');
+    event.currentTarget.classList.add('active');
 }
 
-// Slider logic
-class Slider {
-    constructor(prefix, id) {
-        this.prefix = prefix;
-        this.id = id;
-        this.index = 0;
-        this.container = document.getElementById(`slides-${prefix}${id}`);
-        this.dotsContainer = document.getElementById(`dots-${prefix}${id}`);
-        this.total = this.container ? this.container.children.length : 0;
-        this.autoInterval = null;
-        if (this.total > 0) {
-            this.createDots();
-            this.goTo(0);
-            this.startAutoPlay();
-            const sliderElem = document.getElementById(`slider-${prefix}${id}`);
-            if (sliderElem) {
-                sliderElem.addEventListener("mouseenter", () => this.stopAutoPlay());
-                sliderElem.addEventListener("mouseleave", () => this.startAutoPlay());
-            }
+// Simple slider logic (prev/next per track)
+const sliders = {};
+function initSlider(id) {
+    if (sliders[id]) return;
+    const track = document.getElementById(id);
+    if (!track) return;
+    const total = track.children.length;
+    let idx = 0;
+    const dots = document.getElementById('dots-' + id);
+    if (dots) {
+        for (let i = 0; i < total; i++) {
+            const dot = document.createElement('span');
+            dot.className = 'dot' + (i===0 ? ' active' : '');
+            dot.onclick = () => { idx = i; move(); };
+            dots.appendChild(dot);
         }
     }
-    createDots() {
-        this.dotsContainer.innerHTML = "";
-        for (let i = 0; i < this.total; i++) {
-            const dot = document.createElement("span");
-            dot.classList.add("slider-dot");
-            dot.onclick = () => { this.stopAutoPlay(); this.goTo(i); };
-            this.dotsContainer.appendChild(dot);
-        }
-        this.updateDots();
+    function move() {
+        track.style.transform = `translateX(-${idx * 100}%)`;
+        if (dots) Array.from(dots.children).forEach((d,j) => d.classList.toggle('active', j===idx));
     }
-    updateDots() {
-        const dots = this.dotsContainer.querySelectorAll(".slider-dot");
-        dots.forEach((dot, i) => dot.classList.toggle("active", i === this.index));
-    }
-    goTo(index) {
-        this.index = (index + this.total) % this.total;
-        this.container.style.transform = `translateX(-${this.index * 100}%)`;
-        this.updateDots();
-    }
-    next() { this.goTo(this.index + 1); }
-    prev() { this.goTo(this.index - 1); }
-    startAutoPlay() { this.autoInterval = setInterval(() => this.next(), 5000); }
-    stopAutoPlay() { if (this.autoInterval) clearInterval(this.autoInterval); }
+    sliders[id] = { next: () => { idx = (idx + 1) % total; move(); }, prev: () => { idx = (idx - 1 + total) % total; move(); } };
 }
+function next(id) { initSlider(id); sliders[id].next(); }
+function prev(id) { initSlider(id); sliders[id].prev(); }
 
-// Initialize all sliders (10 breeds × 2 tabs = 20 sliders)
-const sliders = [];
-window.addEventListener("load", () => {
-    for (let i = 1; i <= 10; i++) {
-        sliders.push(new Slider('sales', i));
-        sliders.push(new Slider('adopt', i));
-    }
+// Auto-init visible sliders on load
+window.addEventListener('load', () => {
+    document.querySelectorAll('.slider-track').forEach(t => initSlider(t.id));
 });
-
-function nextSlide(sliderId) {
-    const slider = sliders.find(s => s.prefix + s.id === sliderId);
-    if (slider) { slider.stopAutoPlay(); slider.next(); }
-}
-function prevSlide(sliderId) {
-    const slider = sliders.find(s => s.prefix + s.id === sliderId);
-    if (slider) { slider.stopAutoPlay(); slider.prev(); }
-}
 </script>
 </body>
 </html>
